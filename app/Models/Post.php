@@ -9,4 +9,16 @@ class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
+
+    protected $fillable = ['slug', 'description', 'image', 'likes'];
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, foreignKey: 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class());
+    }
 }
